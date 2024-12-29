@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 
-interface SignupResult {
+export interface SignupResult {
   success: boolean;
   error: string | null;
 }

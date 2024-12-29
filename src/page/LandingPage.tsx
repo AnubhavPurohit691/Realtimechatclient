@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Backgroundcircle from '../components/Backgroundcircle';
 
 const Landing = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -12,9 +13,7 @@ const Landing = () => {
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center p-6 overflow-hidden">
       {/* Decorative Background Elements */}
-      <div className="absolute top-20 left-20 w-80 h-80 bg-indigo-400 rounded-full opacity-10" />
-      <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-400 rounded-full opacity-10" />
-
+      <Backgroundcircle/>
       {/* Floating Chat Bubbles */}
       <div className={`absolute top-40 left-24 transform -rotate-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="bg-white p-4 rounded-3xl shadow-lg">
