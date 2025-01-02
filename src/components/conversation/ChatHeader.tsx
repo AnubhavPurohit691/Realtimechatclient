@@ -1,12 +1,20 @@
 import React from 'react';
 import { ArrowLeft, Phone, Video, MoreVertical } from 'lucide-react';
 import UserAvatar from './useAvatar';
+import { useRecoilValue } from 'recoil';
+import { selectuser } from '../../recoil/atom';
 
 interface ChatHeaderProps {
   toggleSidebar: () => void;
 }
 
+export interface userdata{
+  fullName:string,
+  id:string
+}
+
 const ChatHeader: React.FC<ChatHeaderProps> = ({ toggleSidebar }) => {
+  const usedata:userdata|any=useRecoilValue(selectuser)
   return (
     <div className="p-4 bg-white/10 backdrop-blur-lg border-b border-white/20">
       <div className="flex items-center justify-between">
@@ -14,8 +22,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ toggleSidebar }) => {
           <ArrowLeft className="md:hidden text-white/60 hover:text-white cursor-pointer" onClick={toggleSidebar} />
           <UserAvatar initials="A" gradient />
           <div>
-            <h3 className="text-white font-semibold">Alex Johnson</h3>
-            <p className="text-white/60 text-sm">Online</p>
+            <h3 className="text-white font-semibold">{usedata?.fullName}</h3>
           </div>
         </div>
         <div className="flex items-center space-x-4">

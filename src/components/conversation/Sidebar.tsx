@@ -2,7 +2,10 @@ import React from 'react';
 import { Menu } from 'lucide-react';
 import UserAvatar from './useAvatar';
 import { useGetuser } from '../../hooks/usegetusers';
-import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { selectuser } from '../../recoil/atom';
+
+
 
 interface SidebarProps {
   showSidebar: boolean;
@@ -14,10 +17,12 @@ interface user{
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ showSidebar, toggleSidebar }) => {
-  const navigate = useNavigate()
+  
+  const setuser=useSetRecoilState(selectuser)
   
 
   const {userData}:{userData:user[]|any}=useGetuser()
+  
   return (
     <div className={`${showSidebar ? 'block' : 'hidden'} md:block w-full md:w-80 bg-white/10 backdrop-blur-lg border-r border-white/20`}>
       <div className="p-4 border-b border-white/20">
@@ -33,8 +38,9 @@ const Sidebar: React.FC<SidebarProps> = ({ showSidebar, toggleSidebar }) => {
         </div>
       </div>
       <div className="overflow-y-auto h-[calc(100vh-72px)] md:h-[calc(100vh-72px)]">
-        {userData?.map((data:any, index:any) => (
-          <div 
+        {userData?.map((data:any, index:any) => {
+          
+          return  <div 
             key={index}
             className={`p-4 border-b border-white/20 hover:bg-white/5 cursor-pointer transition-colors ${
               index === 0 ? 'bg-white/10' : ''
@@ -42,8 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showSidebar, toggleSidebar }) => {
           >
             <button className="flex items-center space-x-3" 
             onClick={()=>{
-              navigate("/converstaion/")
-             
+              setuser(data)
             }}
             >
               <UserAvatar initials={data.fullName.charAt(0).toUpperCase()} size="lg" gradient />
@@ -55,7 +60,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showSidebar, toggleSidebar }) => {
               </div>
             </button>
           </div>
-        ))}
+})}
       </div>
     </div>
   );

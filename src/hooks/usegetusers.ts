@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export const useGetuser = (p0?: never[]) => {
+export const useGetuser = () => {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
+    
 
     useEffect(() => {
         const getUser = async () => {
