@@ -4,10 +4,10 @@ import { useCallback } from "react"
 export const usesignin=()=>{
     const signin= useCallback(async(email:string,password:string)=>{
     try {
-    await axios.post("http://localhost:8000/user/signin",{
+    const response = await axios.post("http://localhost:8000/user/signin",{
         email,password
     })
-    return 
+    localStorage.setItem("token",response.data.token)
     
     } catch (error) {
         console.log(error)

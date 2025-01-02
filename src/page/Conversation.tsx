@@ -24,7 +24,7 @@ const ChatConversation: React.FC = () => {
           <ChatHeader toggleSidebar={toggleSidebar} />
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {demoMessages.map((msg) => (
-              <Message key={msg.id} text={msg.text} time={msg.time} sent={msg.sent} />
+              <Message key={msg.id} text={msg.text} time={msg.time} sent={msg.sent}  />
             ))}
           </div>
           <MessageInput />

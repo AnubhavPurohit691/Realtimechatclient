@@ -23,13 +23,18 @@ const AuthPages = () => {
   };
   const {signup}=usesignup()
   const {signin}=usesignin()
-  const handleSubmit = (email: string, password: string, fullName?: string) => {
+  const handleSubmit = async(email: string, password: string, fullName?: string) => {
     if (isSignIn) {
       signin(email, password);
       navigate("/conversation");
     } else {
-      signup(email, password, fullName!);
-      navigate("/signin");
+      const doneornot = await signup(email, password, fullName!);
+      if( doneornot){
+        navigate("/signin");
+      }
+      else{
+        return;
+      }
     }
   };
 

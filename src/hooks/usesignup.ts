@@ -10,7 +10,7 @@ export const usesignup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const signup = useCallback(async (email: string, password: string, fullName: string): Promise<SignupResult> => {
+  const signup = useCallback(async (email: string, password: string, fullName: string) => {
     setIsLoading(true);
     setError(null);
 
@@ -24,10 +24,10 @@ export const usesignup = () => {
         ? err.response?.data?.message || err.message 
         : 'An unknown error occurred';
       setError(errorMessage);
-      return { success: false, error: errorMessage };
+      
     }
   },[] );
 
-  return { signup ,isLoading,error };
+  return { signup  };
 };
 
