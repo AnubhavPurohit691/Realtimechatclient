@@ -15,7 +15,7 @@ export const useGetuser = () => {
                     },
                 });
                 setUserData(response.data); // Store the data
-                console.log(userData)
+                
                 setLoading(false); // Set loading to false once data is fetched
             } catch (err) {
                 setLoading(false); // Set loading to false even if there's an error

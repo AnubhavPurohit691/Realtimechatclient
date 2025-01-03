@@ -3,10 +3,11 @@ import React from 'react';
 interface MessageProps {
   text: string;
   time: string;
-  sent: boolean;
+ 
 }
 
-const Message: React.FC<MessageProps> = ({ text, time, sent }) => {
+const Message: React.FC<MessageProps> = ({ text, time }) => {
+  const sent =true
   return (
     <div className={`flex ${sent ? 'justify-end' : 'justify-start'}`}>
       <div className={`max-w-[70%] ${sent ? 'bg-gradient-to-r from-pink-500 to-pink-400' : 'bg-white/10'} rounded-2xl px-4 py-2`}>
