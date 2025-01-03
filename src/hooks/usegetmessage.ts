@@ -6,25 +6,21 @@ import { useEffect, useState } from "react";
 import { messages } from "../page/Conversation";
 
 export const useGetMessage = () => {
-  const usedata: userdata | any = useRecoilValue(selectuser);
+  const usedata: userdata |any= useRecoilValue(selectuser);
   const [message, setMessage] = useState<messages[] | null>(null);
 
   useEffect(() => {
     const getMessage = async () => {
-      if (!usedata || !usedata.id) {
-        console.error("Invalid user data");
-        return;
-      }
-
       try {
         const token = localStorage.getItem("token");
         if (!token) {
           console.error("Token is missing");
           return;
         }
+       
 
         const response = await axios.get(
-          `http://localhost:8000/message/getmessage/${usedata.id}`,
+          `http://localhost:8000/message/getmessage/${usedata?.id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

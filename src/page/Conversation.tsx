@@ -32,7 +32,7 @@ const ChatConversation: React.FC = () => {
                   <Message
                     key={msg.id}
                     text={msg.body}
-                    time={new Date(msg.createdAt).toLocaleString()}
+                    time={msg.createdAt}
                   />
                 ))
               ) : (

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Send, Image, Smile, Paperclip } from 'lucide-react';
+import { usesendmessage } from '../../hooks/usesendmessage';
 
 const MessageInput: React.FC = () => {
   const [message, setMessage] = useState('');
+  const {sendmessage}=usesendmessage()
 
   return (
     <div className="p-4 bg-white/10 backdrop-blur-lg border-t border-white/20">
@@ -25,7 +27,12 @@ const MessageInput: React.FC = () => {
             <Smile className="h-6 w-6" />
           </button>
         </div>
-        <button className="bg-gradient-to-r from-pink-500 to-pink-400 p-3 rounded-full text-white hover:shadow-lg transition-shadow">
+        <button className="bg-gradient-to-r from-pink-500 to-pink-400 p-3 rounded-full text-white hover:shadow-lg transition-shadow"
+        onClick={()=>{
+          sendmessage(message)
+          setMessage("")
+        }}
+        >
           <Send className="h-6 w-6" />
         </button>
       </div>
