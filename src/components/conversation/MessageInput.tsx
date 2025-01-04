@@ -1,10 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Send, Image, Smile, Paperclip } from 'lucide-react';
 import { usesendmessage } from '../../hooks/usesendmessage';
+import { usesocket } from '../../hooks/usesocket';
 
 const MessageInput: React.FC = () => {
   const [message, setMessage] = useState('');
-  const {sendmessage}=usesendmessage()
+  const { sendmessage } = usesendmessage();
+  const { socket } = usesocket();
+
+  useEffect(() => {
+    const newsocket = new WebSocket('ws://localhost:8000');
+    const cleanup = () => {
+      if (newsocket.readyState === WebSocket.OPEN || WebSocket.CONNECTING) {
+        newsocket.close();
+      }
+    };
+
+    socket(newsocket, message);
+
+    return cleanup;
+  }, [socket, message]);
 
   return (
     <div className="p-4 bg-white/10 backdrop-blur-lg border-t border-white/20">
@@ -27,11 +42,12 @@ const MessageInput: React.FC = () => {
             <Smile className="h-6 w-6" />
           </button>
         </div>
-        <button className="bg-gradient-to-r from-pink-500 to-pink-400 p-3 rounded-full text-white hover:shadow-lg transition-shadow"
-        onClick={()=>{
-          sendmessage(message)
-          setMessage("")
-        }}
+        <button
+          className="bg-gradient-to-r from-pink-500 to-pink-400 p-3 rounded-full text-white hover:shadow-lg transition-shadow"
+          onClick={() => {
+            sendmessage(message);
+            setMessage('');
+          }}
         >
           <Send className="h-6 w-6" />
         </button>

@@ -4,6 +4,7 @@ import UserAvatar from './useAvatar';
 import { useGetuser } from '../../hooks/usegetusers';
 import { useSetRecoilState } from 'recoil';
 import { selectuser } from '../../recoil/atom';
+import { usegetme } from '../../hooks/usegetme';
 
 
 
@@ -20,7 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showSidebar, toggleSidebar }) => {
   
   const setuser=useSetRecoilState(selectuser)
   
-
+  const {getme}=usegetme()
   const {userData}:{userData:user[]|any}=useGetuser()
   
   return (
@@ -30,8 +31,8 @@ const Sidebar: React.FC<SidebarProps> = ({ showSidebar, toggleSidebar }) => {
           <div className="flex items-center space-x-3">
             <UserAvatar initials="JD" />
             <div>
-              <h3 className="text-white font-semibold">John Doe</h3>
-              <p className="text-white/60 text-sm">Online</p>
+              <h3 className="text-white font-semibold">{getme.fullName}</h3>
+              <p className="text-white/60 text-sm">{getme.id}</p>
             </div>
           </div>
           <Menu className="text-white/60 hover:text-white cursor-pointer md:hidden" onClick={toggleSidebar} />
